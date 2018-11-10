@@ -18,6 +18,9 @@ variable "num_webs" {
   default = "1"
 }
 
+variable "public_key" {}
+variable "private_key" {}
+
 provider "aws" {
   version    = "~> 1.5"
   access_key = "${var.access_key}"
@@ -27,6 +30,9 @@ provider "aws" {
 
 module "server" {
   source = "./server"
+  
+  public_key            = "${var.public_key}"
+  private_key           = "${var.private_key}"
 
   num_webs              = "${var.num_webs}"
   ami                   = "${var.ami}"
